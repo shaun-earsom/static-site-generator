@@ -20,13 +20,13 @@ class HTMLNode:
 class LeafNode(HTMLNode):
     def __init__(self, tag=None, value=None, props=None) -> None:
         super().__init__(tag,value, props)
-        self.value = value
         self.tag = tag
+        self.value = value
+        self.props = props
         
     def to_html(self):
         if self.value == None:
             raise ValueError("All leaf nodes require a value")
-        elif self.tag == None:
+        if self.tag == None:
             return self.value
-        else:
-            return "<" + self.tag + ">" + self.value + "</" + self.tag + ">"
+        return "<" + self.tag + ">" + self.value + "</" + self.tag + ">"
