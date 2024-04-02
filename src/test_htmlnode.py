@@ -12,13 +12,13 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(result, ' href="https://www.google.com" target="_blank"')
 
     def test_leafnodeblock(self):
-        node = LeafNode(tag="p", value="This is a test.")
+        node = LeafNode("p", "This is a test.", None)
         result = node.to_html()
         
         self.assertEqual(result, "<p>This is a test.</p>")
 
     def test_lefnodehref(self):
-        node = LeafNode(tag="a", value="Click me!", props={"href": "https://www.google.com"})
+        node = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
         result = node.to_html()
 
         self.assertEqual(result, '<a href="https://www.google.com">Click me!</a>')
