@@ -3,6 +3,8 @@ import unittest
 from htmlnode import HTMLNode
 from htmlnode import LeafNode
 from htmlnode import ParentNode
+from htmlnode import text_node_to_html_node
+from textnode import TextNode
 
 
 class TestTextNode(unittest.TestCase):
@@ -36,6 +38,28 @@ class TestTextNode(unittest.TestCase):
         )
         result = node.to_html()
         self.assertEqual(result, "<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>")
+    
+    def test_text2htmlText(self):
+        node = TextNode("This is normal text", "text")
+        node2 = text_node_to_html_node(node)
+        self.assertEqual(node2, LeafNode(None, "This is normal text", None))
+    
+    def test_text2htmlBold(self):
+        node = TextNode("This is normal text", "bold")
+        node2 = text_node_to_html_node(node)
+        self.assertNotEqual(node2, "<b>This is normal text</b>")
+    
+    def test_text2htmlItalic(self):
+        node = TextNode("This is normal text", "italic")
+        node2 = text_node_to_html_node(node)
+        self.assertNotEqual(node2, "<i>This is normal text</i>")
+    
+    def test_text2htmlcode(self):
+        node = TextNode("This is normal text", "link", "https://www.google.com")
+        node2 = text_node_to_html_node(node)
+        print(node2)
+        self.assertNotEqual(node2, "This is normal text</p>")
+
 
 if __name__ == "__main__":
     unittest.main()
