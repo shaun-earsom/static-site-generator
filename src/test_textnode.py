@@ -2,6 +2,7 @@ import unittest
 
 from textnode import TextNode
 from textnode import text_node_to_html_node
+from textnode import split_nodes_delimiter
 from htmlnode import LeafNode
 
 
@@ -49,6 +50,10 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("cow", "image", "https://www.cows.com/cow.gif")
         node2 = text_node_to_html_node(node)
         self.assertEqual(node2, LeafNode("img", "",{"src": "https://www.cows.com/cow.gif", "alt": "cow"}))
+    
+    def test_splitNodeDelimTxt(self):
+        node = split_nodes_delimiter("This is normal text.", " ", "text")
+        self.assertEqual(node, TextNode("This is normal text.", "text"))
 
 if __name__ == "__main__":
     unittest.main()
