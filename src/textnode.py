@@ -37,32 +37,16 @@ def text_node_to_html_node(text_node):
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = [] 
+    node_list = old_nodes.split(delimiter)
     if old_nodes != text_type_text:
-        new_nodes.append(old_nodes)
-        return new_nodes
-
+        pass
     if text_type == text_type_text:
-        node_list = old_nodes.split(delimiter)
-        for n in node_list:
-            node = TextNode(n, text_type_text)
-            new_nodes.append(node)
-        
-        new_nodes = split_nodes_delimiter([node], " ", text_type_text)
-        return new_nodes
-
+        pass
     if text_type == text_type_bold:
-        node = old_nodes.split(delimiter)
-        new_nodes = split_nodes_delimiter([node], "**", text_type_bold)
-        return new_nodes
-
+        pass
     if text_type == text_type_italic:
-        node = old_nodes.split(delimiter)
-        new_nodes = split_nodes_delimiter([node], "*", text_type_italic)
-        return new_nodes
-
+        pass
     if text_type == text_type_code:
-        node = old_nodes.split(delimiter)
-        new_nodes = split_nodes_delimiter([node], "`", text_type_code)
-        return new_nodes
+        pass
 
     raise Exception(f"Not supported text type in split_nodes_delimiter: {text_type}.")
