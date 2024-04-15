@@ -37,17 +37,19 @@ def text_node_to_html_node(text_node):
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_node_list = []
     
-    if not isinstance(old_nodes, TextNode):
+    for node in old_nodes:
+        if not isinstance(node, TextNode):
             new_node_list.append(old_nodes)
+    this_node = node.text
+    node_list = this_node.split(delimiter)
 
-    node_list = old_nodes.text.split(delimiter)
     for i in range(len(node_list)):
         if i == 0:
-            new_node_list.append(TextNode(node_list, text_type_text))
+            new_node_list.append(TextNode(node_list[i], text_type_text))
         elif i % 2 != 0:
-            new_node_list.append(TextNode(node_list, text_type))
+            new_node_list.append(TextNode(node_list[i], text_type))
         else:
-            new_node_list.append(TextNode(node_list, text_type_text))
+            new_node_list.append(TextNode(node_list[i], text_type_text))
     
     return new_node_list
         
