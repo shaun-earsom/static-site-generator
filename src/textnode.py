@@ -14,7 +14,6 @@ class TextNode:
         self.url = url # The URL of the link or image
 
     def __eq__(self, __value: object) -> bool:
-        print(__value)
         return self.text == __value.text and self.text_type == __value.text_type and self.url == __value.url
     
     def __repr__(self) -> str:
@@ -36,17 +35,19 @@ def text_node_to_html_node(text_node):
     raise Exception(f"Not supported text type in text_node_to_html_node: {text_node.text_type}.")
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
-    new_nodes = [] 
-    node_list = old_nodes.split(delimiter)
-    if old_nodes != text_type_text:
-        pass
-    if text_type == text_type_text:
-        pass
-    if text_type == text_type_bold:
-        pass
-    if text_type == text_type_italic:
-        pass
-    if text_type == text_type_code:
-        pass
+    new_node_list = []
+    
+    if not isinstance(old_nodes, TextNode):
+            new_node_list.append(old_nodes)
 
-    raise Exception(f"Not supported text type in split_nodes_delimiter: {text_type}.")
+    node_list = old_nodes.text.split(delimiter)
+    for i in range(len(node_list)):
+        if i == 0:
+            new_node_list.append(TextNode(node_list, text_type_text))
+        elif i % 2 != 0:
+            new_node_list.append(TextNode(node_list, text_type))
+        else:
+            new_node_list.append(TextNode(node_list, text_type_text))
+    
+    return new_node_list
+        
